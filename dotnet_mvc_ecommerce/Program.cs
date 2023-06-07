@@ -1,4 +1,12 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using dotnet_mvc_ecommerce.Data;
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("dotnet_mvc_ecommerceContextConnection") ?? throw new InvalidOperationException("Connection string 'dotnet_mvc_ecommerceContextConnection' not found.");
+
+builder.Services.AddDbContext<dotnet_mvc_ecommerceContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<dotnet_mvc_ecommerceContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

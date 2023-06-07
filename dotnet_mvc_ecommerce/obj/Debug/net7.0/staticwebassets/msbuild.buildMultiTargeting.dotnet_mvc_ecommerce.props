@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\dotnet_mvc_ecommerce.props" />
+</Project>
