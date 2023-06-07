@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using dotnet_mvc_ecommerce.Data;
+using dotnet_mvc_ecommerce.Areas.Identity.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("dotnet_mvc_ecommerceContextConnection") ?? throw new InvalidOperationException("Connection string 'dotnet_mvc_ecommerceContextConnection' not found.");
 

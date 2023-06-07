@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "mcHNztUTBFrN24Tp+oT4rL9C3Z7IuJLyC8b+AmXqJbb74Al1MHpgUvTRDQgVK1Dft3pf92rlDW1I525/nfNP4A==",
+  "dgSpecHash": "1bkszYikRwaTP6MJRWW9odpQ0WtUKEbfWQI7GGUEOh1naGOb6wvjnF6AQ94h1pMh3HSn3mJUCG7E4w/LLxDBdQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\ASUS\\source\\repos\\dotnet_mvc_ecommerce\\dotnet_mvc_ecommerce\\dotnet_mvc_ecommerce.csproj",
   "expectedPackageFiles": [
@@ -191,7 +191,10 @@
     "C:\\Users\\ASUS\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\ASUS\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\ASUS\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\ASUS\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\ASUS\\.nuget\\packages\\xunit.abstractions\\2.0.3\\xunit.abstractions.2.0.3.nupkg.sha512",
+    "C:\\Users\\ASUS\\.nuget\\packages\\xunit.extensibility.core\\2.4.2\\xunit.extensibility.core.2.4.2.nupkg.sha512",
+    "C:\\Users\\ASUS\\.nuget\\packages\\xunit.extensibility.execution\\2.4.2\\xunit.extensibility.execution.2.4.2.nupkg.sha512"
   ],
   "logs": []
 }
