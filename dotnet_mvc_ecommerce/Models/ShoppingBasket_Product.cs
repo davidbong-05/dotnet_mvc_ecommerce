@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using dotnet_mvc_ecommerce.Migrations;
+using System.ComponentModel.DataAnnotations;
 
 namespace dotnet_mvc_ecommerce.Models
 {
@@ -12,5 +13,14 @@ namespace dotnet_mvc_ecommerce.Models
 
         [Display(Name = "quantity")]
         public int Quantity { get; set; }
+
+        public ShoppingBasket_Product() { }
+
+        public ShoppingBasket_Product(ShoppingBasket shoppingBasket, Product product, int quantity)
+        {
+            ShoppingBasket = shoppingBasket;
+            Product = product;
+            Quantity = quantity;
+        }
     }
 }

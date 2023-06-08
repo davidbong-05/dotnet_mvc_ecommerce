@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using dotnet_mvc_ecommerce.Data;
 using dotnet_mvc_ecommerce.Models;
+using Microsoft.AspNetCore.Identity;
+using dotnet_mvc_ecommerce.Areas.Identity.Data;
 
 namespace dotnet_mvc_ecommerce.Controllers
 {
     public class ProductController : Controller
     {
         private readonly dotnet_mvc_ecommerceContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public ProductController(dotnet_mvc_ecommerceContext context)
+        public ProductController(dotnet_mvc_ecommerceContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Product
@@ -155,9 +159,36 @@ namespace dotnet_mvc_ecommerce.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // POST: Product/AddToBasket/5
+        [HttpPost, ActionName("AddToBasket")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddToBasket(int id)
+        {
+            var user = await _userManager.GetUserAsync(this.User);
+
+            var product = await _context.Product.FindAsync(id);
+            var shoppingBasket = await _context.ShoppingBasket.FirstOrDefaultAsync(m => m.UserId == user.Id);
+            var quantity = 1;
+            if (product != null)
+            {
+                if(shoppingBasket == null) 
+                {
+                    var _shoppingBasket = new ShoppingBasket(user);
+                    _context.Add(_shoppingBasket);
+                    await _context.SaveChangesAsync();
+                    shoppingBasket = await _context.ShoppingBasket.FirstOrDefaultAsync(m => m.UserId == user.Id);
+                }
+                var shoppingBasket_Product = new ShoppingBasket_Product(shoppingBasket, product, quantity);
+                _context.Add(shoppingBasket_Product);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
         private bool ProductExists(int id)
         {
           return (_context.Product?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
     }
 }
