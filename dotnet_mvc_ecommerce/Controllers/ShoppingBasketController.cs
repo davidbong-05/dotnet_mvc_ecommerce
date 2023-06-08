@@ -22,7 +22,10 @@ namespace dotnet_mvc_ecommerce.Controllers
         // GET: ShoppingBasket
         public async Task<IActionResult> Index()
         {
-            var dotnet_mvc_ecommerceContext = _context.ShoppingBasket.Include(s => s.User);
+            var dotnet_mvc_ecommerceContext = _context.ShoppingBasket
+                .Include(s => s.User)
+                .Include(s => s.ShoppingBasket_Products)
+                    .ThenInclude(sp => sp.Product);
             return View(await dotnet_mvc_ecommerceContext.ToListAsync());
         }
 

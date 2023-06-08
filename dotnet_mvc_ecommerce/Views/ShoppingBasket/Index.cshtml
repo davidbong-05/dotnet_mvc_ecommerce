@@ -15,14 +15,30 @@
             <th>
                 @Html.DisplayNameFor(model => model.User)
             </th>
-            <th></th>
+            <th>
+                Product
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
+                @Html.DisplayFor(modelItem => item.User.Email)
+            </td>
+            <td>
+                <ul>
+                    @foreach (var childItem in item.ShoppingBasket_Products) {
+                    <li>@Html.DisplayFor(modelItem => childItem.Product.ProductName)</li>
+                    }
+                </ul>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Email)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
