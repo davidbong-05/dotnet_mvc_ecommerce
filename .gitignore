@@ -475,3 +475,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+dotnet_mvc_ecommerce/appsettings.json
