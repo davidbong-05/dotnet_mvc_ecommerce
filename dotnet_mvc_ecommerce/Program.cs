@@ -8,7 +8,9 @@ var connectionString = builder.Configuration.GetConnectionString("dotnet_mvc_eco
 
 builder.Services.AddDbContext<dotnet_mvc_ecommerceContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<dotnet_mvc_ecommerceContext>();
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<dotnet_mvc_ecommerceContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -35,5 +37,19 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
+
+// create role
+    using(var scope = app.Services.CreateScope())
+    {
+        var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+        var roles = new[] { "Customer", "Shop Assistance" };
+
+        foreach(var role in roles)
+        {
+            if (!await roleManager.RoleExistsAsync(role))
+                await roleManager.CreateAsync(new IdentityRole(role));
+        }
+    }
 
 app.Run();

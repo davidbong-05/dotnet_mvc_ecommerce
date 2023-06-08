@@ -46,4 +46,5 @@ public class dotnet_mvc_ecommerceContext : IdentityDbContext<User>
 
     public DbSet<ShoppingBasket_Product> ShoppingBasket_Product { get; set; }
 
+
 }

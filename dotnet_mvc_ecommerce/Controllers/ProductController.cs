@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using dotnet_mvc_ecommerce.Data;
 using dotnet_mvc_ecommerce.Models;
+using Microsoft.AspNetCore.Identity;
+using dotnet_mvc_ecommerce.Areas.Identity.Data;
 
 namespace dotnet_mvc_ecommerce.Controllers
 {
