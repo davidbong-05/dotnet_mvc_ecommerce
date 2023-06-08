@@ -15,5 +15,7 @@ public class User : IdentityUser
     public virtual ICollection<Order> Orders { get; set; }
 
     public virtual ICollection<ShoppingBasket> ShoppingBaskets { get; set; }
+
+    public virtual ICollection<CustomerDetail>? CustomerDetail { get; set; }
 }
 

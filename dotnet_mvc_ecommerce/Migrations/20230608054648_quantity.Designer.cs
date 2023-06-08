@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using dotnet_mvc_ecommerce.Data;
 
@@ -11,9 +12,11 @@ using dotnet_mvc_ecommerce.Data;
 namespace dotnet_mvc_ecommerce.Migrations
 {
     [DbContext(typeof(dotnet_mvc_ecommerceContext))]
-    partial class dotnet_mvc_ecommerceContextModelSnapshot : ModelSnapshot
+    [Migration("20230608054648_quantity")]
+    partial class quantity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

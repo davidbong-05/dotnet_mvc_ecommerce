@@ -8,7 +8,7 @@ namespace dotnet_mvc_ecommerce.Models
     public class Product
     {
         [Key]
-        public int id { set; get; }
+        public int Id { set; get; }
 
         [Display(Name = "name")]
         [Column(TypeName = "nvarchar(256)")]
@@ -23,10 +23,7 @@ namespace dotnet_mvc_ecommerce.Models
 
         //relationship
         public virtual ICollection<Order_Product> Order_Products { get; set; }
+        public virtual ICollection<ShoppingBasket_Product> ShoppingBasket_Products { get; set; }
 
-        //ShoppingBasketId
-        public int ShoppingBasketId { get; set; }
-        [ForeignKey(" ShoppingBasketId")]
-        public virtual ShoppingBasket ShoppingBasket { get; set; }
     }
 }

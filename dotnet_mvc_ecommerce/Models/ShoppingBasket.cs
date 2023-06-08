@@ -10,11 +10,9 @@ namespace dotnet_mvc_ecommerce.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "quantity")]
-        public int Quantity { get; set; }
 
         //Relationship
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<ShoppingBasket_Product> ShoppingBasket_Products { get; set; }
 
 
         //User

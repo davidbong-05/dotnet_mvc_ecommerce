@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using dotnet_mvc_ecommerce.Data;
 
@@ -11,9 +12,11 @@ using dotnet_mvc_ecommerce.Data;
 namespace dotnet_mvc_ecommerce.Migrations
 {
     [DbContext(typeof(dotnet_mvc_ecommerceContext))]
-    partial class dotnet_mvc_ecommerceContextModelSnapshot : ModelSnapshot
+    [Migration("20230608045922_customerdetail")]
+    partial class customerdetail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -301,7 +304,12 @@ namespace dotnet_mvc_ecommerce.Migrations
                     b.Property<float>("ProductPrice")
                         .HasColumnType("real");
 
+                    b.Property<int>("ShoppingBasketId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ShoppingBasketId");
 
                     b.ToTable("Product");
                 });
@@ -314,6 +322,9 @@ namespace dotnet_mvc_ecommerce.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -322,24 +333,6 @@ namespace dotnet_mvc_ecommerce.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("ShoppingBasket");
-                });
-
-            modelBuilder.Entity("dotnet_mvc_ecommerce.Models.ShoppingBasket_Product", b =>
-                {
-                    b.Property<int>("ShoppingBasketId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("ShoppingBasketId", "ProductId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ShoppingBasket_Product");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -430,6 +423,17 @@ namespace dotnet_mvc_ecommerce.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("dotnet_mvc_ecommerce.Models.Product", b =>
+                {
+                    b.HasOne("dotnet_mvc_ecommerce.Models.ShoppingBasket", "ShoppingBasket")
+                        .WithMany("Products")
+                        .HasForeignKey("ShoppingBasketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ShoppingBasket");
+                });
+
             modelBuilder.Entity("dotnet_mvc_ecommerce.Models.ShoppingBasket", b =>
                 {
                     b.HasOne("dotnet_mvc_ecommerce.Areas.Identity.Data.User", "User")
@@ -437,25 +441,6 @@ namespace dotnet_mvc_ecommerce.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("dotnet_mvc_ecommerce.Models.ShoppingBasket_Product", b =>
-                {
-                    b.HasOne("dotnet_mvc_ecommerce.Models.Product", "Product")
-                        .WithMany("ShoppingBasket_Products")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("dotnet_mvc_ecommerce.Models.ShoppingBasket", "ShoppingBasket")
-                        .WithMany("ShoppingBasket_Products")
-                        .HasForeignKey("ShoppingBasketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("ShoppingBasket");
                 });
 
             modelBuilder.Entity("dotnet_mvc_ecommerce.Areas.Identity.Data.User", b =>
@@ -475,13 +460,11 @@ namespace dotnet_mvc_ecommerce.Migrations
             modelBuilder.Entity("dotnet_mvc_ecommerce.Models.Product", b =>
                 {
                     b.Navigation("Order_Products");
-
-                    b.Navigation("ShoppingBasket_Products");
                 });
 
             modelBuilder.Entity("dotnet_mvc_ecommerce.Models.ShoppingBasket", b =>
                 {
-                    b.Navigation("ShoppingBasket_Products");
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }
