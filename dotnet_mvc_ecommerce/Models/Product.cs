@@ -22,8 +22,8 @@ namespace dotnet_mvc_ecommerce.Models
         public float ProductPrice { get; set; }
 
         //relationship
-        public virtual ICollection<Order_Product> Order_Products { get; set; }
-        public virtual ICollection<ShoppingBasket_Product> ShoppingBasket_Products { get; set; }
+        public virtual ICollection<Order_Product>? Order_Products { get; set; }
+        public virtual ICollection<ShoppingBasket_Product>? ShoppingBasket_Products { get; set; }
 
     }
 }
