@@ -5,7 +5,7 @@
 @inject UserManager<User> UserManager
 
 @if (SignInManager.IsSignedIn(User)){
-    @if (User.IsInRole("Shop Assistance"))
+    @if (User.IsInRole("Shop Assistant"))
     {
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="" asp-controller="CustomerDetail" asp-action="Index">CustomerDetail</a>
@@ -14,7 +14,7 @@
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
     </li>
-    @if (User.IsInRole("Shop Assistance"))
+    @if (User.IsInRole("Shop Assistant"))
     {
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">Order</a>

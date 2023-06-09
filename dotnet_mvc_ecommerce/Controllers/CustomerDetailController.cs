@@ -31,7 +31,7 @@ namespace dotnet_mvc_ecommerce.Controllers
             var user = await _userManager.GetUserAsync(this.User);
             var dotnet_mvc_ecommerceContext = _context.CustomerDetail;
 
-            if (User.IsInRole("Shop Assistance"))
+            if (User.IsInRole("Shop Assistant"))
             {
                 dotnet_mvc_ecommerceContext.Include(c => c.User);
             }
@@ -77,7 +77,7 @@ namespace dotnet_mvc_ecommerce.Controllers
                 ViewData["UserId"] = new SelectList(filteredUsers, "Id", "UserName");
             }
 
-            if (User.IsInRole("Shop Assistance"))
+            if (User.IsInRole("Shop Assistant"))
             {
                 ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName");
             }
@@ -109,7 +109,7 @@ namespace dotnet_mvc_ecommerce.Controllers
                 ViewData["UserId"] = new SelectList(filteredUsers, "Id", "UserName");
             }
 
-            if (User.IsInRole("Shop Assistance"))
+            if (User.IsInRole("Shop Assistant"))
             {
                 ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName");
             }
@@ -140,7 +140,7 @@ namespace dotnet_mvc_ecommerce.Controllers
                 ViewData["UserId"] = new SelectList(filteredUsers, "Id", "UserName");
             }
 
-            if (User.IsInRole("Shop Assistance"))
+            if (User.IsInRole("Shop Assistant"))
             {
                 ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName");
             }
@@ -190,7 +190,7 @@ namespace dotnet_mvc_ecommerce.Controllers
                 ViewData["UserId"] = new SelectList(filteredUsers, "Id", "UserName");
             }
 
-            if (User.IsInRole("Shop Assistance"))
+            if (User.IsInRole("Shop Assistant"))
             {
                 ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName");
             }
