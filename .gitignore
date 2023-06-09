@@ -477,3 +477,4 @@ $RECYCLE.BIN/
 *.lnk
 
 dotnet_mvc_ecommerce/appsettings.json
+/.vs/dotnet_mvc_ecommerce/v17/.suo
