@@ -19,5 +19,13 @@ namespace dotnet_mvc_ecommerce.Models
         public string? UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual User? User { get; set; }
+
+        public CustomerDetail() { }
+
+        public CustomerDetail(string? creditCard, User? user)
+        {
+            CreditCard = creditCard;
+            User = user;
+        }
     }
 }
