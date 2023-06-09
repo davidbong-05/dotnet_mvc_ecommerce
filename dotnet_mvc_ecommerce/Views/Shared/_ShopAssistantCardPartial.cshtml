@@ -2,7 +2,7 @@
     <div class="card-title">
         Only Shop Assistant Action
     </div>
-    @if (User.IsInRole("Shop Assistance"))
+    @if (User.IsInRole("Shop Assistant"))
     {
         <a class="btn btn-primary my-2" asp-controller="Product" asp-action="Index">Manage Product</a>
         <a class="btn btn-primary my-2" asp-controller="Order" asp-action="Index">Manage Order</a>
