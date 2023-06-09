@@ -51,6 +51,7 @@ namespace dotnet_mvc_ecommerce.Controllers
             return View(product);
         }
 
+        [Authorize(Roles = "Shop Assistance")]
         // GET: Product/Create
         public IActionResult Create()
         {
@@ -73,6 +74,7 @@ namespace dotnet_mvc_ecommerce.Controllers
             return View(product);
         }
 
+        [Authorize(Roles = "Shop Assistance")]
         // GET: Product/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -124,6 +126,7 @@ namespace dotnet_mvc_ecommerce.Controllers
             return View(product);
         }
 
+        [Authorize(Roles = "Shop Assistance")]
         // GET: Product/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
