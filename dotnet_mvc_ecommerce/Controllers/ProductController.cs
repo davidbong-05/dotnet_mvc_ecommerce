@@ -51,7 +51,7 @@ namespace dotnet_mvc_ecommerce.Controllers
             return View(product);
         }
 
-        [Authorize(Roles = "Shop Assistance")]
+        [Authorize(Roles = "Shop Assistant")]
         // GET: Product/Create
         public IActionResult Create()
         {
@@ -74,7 +74,7 @@ namespace dotnet_mvc_ecommerce.Controllers
             return View(product);
         }
 
-        [Authorize(Roles = "Shop Assistance")]
+        [Authorize(Roles = "Shop Assistant")]
         // GET: Product/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -126,7 +126,7 @@ namespace dotnet_mvc_ecommerce.Controllers
             return View(product);
         }
 
-        [Authorize(Roles = "Shop Assistance")]
+        [Authorize(Roles = "Shop Assistant")]
         // GET: Product/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -174,21 +174,6 @@ namespace dotnet_mvc_ecommerce.Controllers
             var product = await _context.Product.FindAsync(id);
             var shoppingBasket = await _context.ShoppingBasket.FirstOrDefaultAsync(m => m.UserId == user.Id);
             var quantity = 1;
-            //if (product != null)
-            //{
-            //    if(shoppingBasket == null) 
-            //    {
-            //        var _shoppingBasket = new ShoppingBasket(user);
-            //        _context.Add(_shoppingBasket);
-            //        await _context.SaveChangesAsync();
-            //        shoppingBasket = await _context.ShoppingBasket.FirstOrDefaultAsync(m => m.UserId == user.Id);
-            //        var shoppingBasket_Product = new ShoppingBasket_Product(shoppingBasket, product, quantity);
-            //        _context.Add(shoppingBasket_Product);
-            //        await _context.SaveChangesAsync();
-            //    }
-
-               
-            //}
             if (product != null)
             {
                 if (shoppingBasket == null)
