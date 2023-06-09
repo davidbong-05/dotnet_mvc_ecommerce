@@ -6,19 +6,19 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ShoppingBasket)
-            </th>
+            @if (User.IsInRole("Shop Assistance"))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.ShoppingBasket)
+                </th>
+            }
             <th>
                 @Html.DisplayNameFor(model => model.Product)
             </th>
-            <th>
+            <th class="col-2">
                 @Html.DisplayNameFor(model => model.Quantity)
             </th>
             <th></th>
@@ -27,22 +27,33 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShoppingBasket.Id)
-            </td>
+            @if (User.IsInRole("Shop Assistance"))
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShoppingBasket.Id)
+                </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.Product.ProductName)
             </td>
             <td>
-                    <form asp-action="remove" asp-route-id="@item.ProductId">
-                        <input type="hidden" asp-for="@item.ProductId" />
-                        <input type="submit" value="-" class="btn btn-primary" />
-                    </form>
-                @Html.DisplayFor(modelItem => item.Quantity)
-                    <form asp-action="add" asp-route-id="@item.ProductId">
-                        <input type="hidden" asp-for="@item.ProductId" />
-                        <input type="submit" value="+" class="btn btn-primary" />
-                    </form>
+                <div class="row">
+                    <div class="col">
+                            <form asp-action="remove" asp-route-id="@item.ProductId">
+                                <input type="hidden" asp-for="@item.ProductId" />
+                                <input type="submit" value="-" class="btn btn-primary" />
+                            </form>
+                    </div>
+                    <div class="col">
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                    </div>
+                    <div class="col">
+                            <form asp-action="add" asp-route-id="@item.ProductId">
+                                <input type="hidden" asp-for="@item.ProductId" />
+                                <input type="submit" value="+" class="btn btn-primary" />
+                            </form>
+                    </div>
+                </div>
             </td>
             <td>
                

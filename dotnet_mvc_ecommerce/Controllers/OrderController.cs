@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using dotnet_mvc_ecommerce.Data;
 using dotnet_mvc_ecommerce.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace dotnet_mvc_ecommerce.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly dotnet_mvc_ecommerceContext _context;
