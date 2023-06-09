@@ -4,6 +4,15 @@
     ViewData["Title"] = "Index";
 }
 
+@if (TempData["success"] != null)
+{
+    <h2>@TempData["success"]</h2>
+}
+else
+{
+    <h2>@TempData["error"]</h2>
+}
+
 <h1>Index</h1>
 
 @if (User.IsInRole("Shop Assistant"))
@@ -74,4 +83,25 @@
         </tr>
 }
     </tbody>
+    <tfoot>
+        <tr>
+            <td>
+                <form asp-action="Checkout" method="post">
+                    <input type="" name="password" placeholder="password" />
+                    @foreach (var item in Model  )
+                    {
+                        @foreach (var childItem in item.ShoppingBasket_Products)
+                        {
+                            <input type="hidden" name="ProductNames" value="@childItem.Product.ProductName" />
+                            <input type="hidden" name="Quantities" value="@childItem.Quantity" />
+                    
+                        }
+                        <input type="hidden" name="ShoppingBasketId" value="@item.Id" />
+                    }
+           
+                    <input type="submit" value="Checkout" class="btn btn-primary" />
+                </form>
+            </td>
+        </tr>
+    </tfoot>
 </table>

@@ -235,5 +235,49 @@ namespace dotnet_mvc_ecommerce.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+        [HttpPost]
+        public async Task<IActionResult> Checkout(string password, string[] ProductNames, int[] Quantities, int ShoppingBasketId)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var username = await _userManager.FindByEmailAsync(user.Email);
+
+            if (password != null && await _userManager.CheckPasswordAsync(username, password))
+            {
+                var orderDetails = new List<string>();
+
+            for (int i = 0; i < ProductNames.Length; i++)
+            {
+                var orderDetail = $"{ProductNames[i]} - {Quantities[i]}";
+                orderDetails.Add(orderDetail);
+            }
+
+            var combinedOrderDetails = string.Join(", ", orderDetails);
+
+            var order = new Order
+            {
+                OrderDetails = combinedOrderDetails,
+                UserId = user.Id
+            };
+
+            _context.Order.Add(order);
+            await _context.SaveChangesAsync();
+
+             
+            var shoppingBasket = await _context.ShoppingBasket.FindAsync(ShoppingBasketId);
+            if (shoppingBasket != null)
+            {
+                _context.ShoppingBasket.Remove(shoppingBasket);
+                await _context.SaveChangesAsync();
+            }
+
+                TempData["success"] = "Order added to basket";
+                return RedirectToAction(nameof(Index));
+            }
+            TempData["error"] = "Order failed";
+            return RedirectToAction(nameof(Index));
+
+        }
+
+
     }
 }
