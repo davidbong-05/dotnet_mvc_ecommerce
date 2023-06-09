@@ -59,7 +59,7 @@ namespace dotnet_mvc_ecommerce.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,OrderDetails,UserId")] Order order)
+        public async Task<IActionResult> Create([Bind("Id,OrderDetails,UserId")] Order order, string password)
         {
             if (ModelState.IsValid)
             {
