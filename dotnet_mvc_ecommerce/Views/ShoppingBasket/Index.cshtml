@@ -6,7 +6,7 @@
 
 <h1>Index</h1>
 
-@if (User.IsInRole("Shop Assistance"))
+@if (User.IsInRole("Shop Assistant"))
 {
     <p>
         <a asp-action="Create">Create New</a>
@@ -15,7 +15,7 @@
 <table class="table">
     <thead>
         <tr>
-            @if (User.IsInRole("Shop Assistance"))
+            @if (User.IsInRole("Shop Assistant"))
             {
                 <th>
                     @Html.DisplayNameFor(model => model.User)
@@ -24,7 +24,7 @@
             <th>
                 Product
             </th>
-            @if (User.IsInRole("Shop Assistance"))
+            @if (User.IsInRole("Shop Assistant"))
             {
                 <th>Action</th>
             }
@@ -33,7 +33,7 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-                @if (User.IsInRole("Shop Assistance"))
+                @if (User.IsInRole("Shop Assistant"))
                 {
                     <td>
                         @Html.DisplayFor(modelItem => item.User.Email)
@@ -63,7 +63,7 @@
                         </div>
                     }
             </td>
-                @if (User.IsInRole("Shop Assistance"))
+                @if (User.IsInRole("Shop Assistant"))
                 {
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
