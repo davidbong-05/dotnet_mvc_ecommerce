@@ -1,0 +1,21 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using dotnet_mvc_ecommerce.Areas.Identity.Data
+
+@inject UserManager<User> UserManager
+
+<div class="card m-4 p-4">
+    <div class="card-title">
+        Only Customer Action
+    </div>
+    @if (User.IsInRole("Customer"))
+    {
+        <a class="btn btn-primary my-2" asp-controller="CustomerDetail" asp-action="Index">Customer Detail</a>
+        <a class="btn btn-primary my-2" asp-controller="ShoppingBasket" asp-action="Index">Shopping Basket</a>
+    }
+    else
+    {
+        <button type="button" class="btn btn-secondary my-2" disabled>Customer Detail</button>
+        <button type="button" class="btn btn-secondary my-2" disabled>Shopping Basket</button>
+    }
+</div>
+

@@ -1,8 +1,17 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@using Microsoft.AspNetCore.Identity
+@using dotnet_mvc_ecommerce.Areas.Identity.Data
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@inject SignInManager<User> SignInManager
+
+
+<div class="container d-flex justify-content-center">
+    <partial name="_AllUserCardPartial" />
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <partial name="_CustomerCardPartial" />
+        <partial name="_ShopAssistantCardPartial" />
+    }
 </div>

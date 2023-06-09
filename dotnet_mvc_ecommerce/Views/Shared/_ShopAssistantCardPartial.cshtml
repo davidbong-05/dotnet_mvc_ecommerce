@@ -1,0 +1,15 @@
+﻿<div class="card m-4 p-4">
+    <div class="card-title">
+        Only Shop Assistant Action
+    </div>
+    @if (User.IsInRole("Shop Assistance"))
+    {
+        <a class="btn btn-primary my-2" asp-controller="Product" asp-action="Index">Manage Product</a>
+        <a class="btn btn-primary my-2" asp-controller="Order" asp-action="Index">Manage Order</a>
+    }
+    else
+    {
+        <button type="button" class="btn btn-secondary my-2" disabled>Manage Product</button>
+        <button type="button" class="btn btn-secondary my-2" disabled>Manage Order</button>
+    }
+</div>
