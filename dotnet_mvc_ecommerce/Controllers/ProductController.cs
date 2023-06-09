@@ -169,19 +169,50 @@ namespace dotnet_mvc_ecommerce.Controllers
             var product = await _context.Product.FindAsync(id);
             var shoppingBasket = await _context.ShoppingBasket.FirstOrDefaultAsync(m => m.UserId == user.Id);
             var quantity = 1;
+            //if (product != null)
+            //{
+            //    if(shoppingBasket == null) 
+            //    {
+            //        var _shoppingBasket = new ShoppingBasket(user);
+            //        _context.Add(_shoppingBasket);
+            //        await _context.SaveChangesAsync();
+            //        shoppingBasket = await _context.ShoppingBasket.FirstOrDefaultAsync(m => m.UserId == user.Id);
+            //        var shoppingBasket_Product = new ShoppingBasket_Product(shoppingBasket, product, quantity);
+            //        _context.Add(shoppingBasket_Product);
+            //        await _context.SaveChangesAsync();
+            //    }
+
+               
+            //}
             if (product != null)
             {
-                if(shoppingBasket == null) 
+                if (shoppingBasket == null)
                 {
-                    var _shoppingBasket = new ShoppingBasket(user);
-                    _context.Add(_shoppingBasket);
+                    var newShoppingBasket = new ShoppingBasket(user);
+                    _context.Add(newShoppingBasket);
                     await _context.SaveChangesAsync();
                     shoppingBasket = await _context.ShoppingBasket.FirstOrDefaultAsync(m => m.UserId == user.Id);
                 }
-                var shoppingBasket_Product = new ShoppingBasket_Product(shoppingBasket, product, quantity);
-                _context.Add(shoppingBasket_Product);
+
+                var shoppingBasketProduct = await _context.ShoppingBasket_Product.FirstOrDefaultAsync(p =>
+                    p.ShoppingBasketId == shoppingBasket.Id && p.ProductId == product.Id);
+
+                if (shoppingBasketProduct == null)
+                {
+                    shoppingBasketProduct = new ShoppingBasket_Product(shoppingBasket, product, quantity);
+                    _context.Add(shoppingBasketProduct);
+                }
+                else
+                {
+                    shoppingBasketProduct.Quantity += quantity;
+                }
+
                 await _context.SaveChangesAsync();
+                TempData["success"] = "Product added to basket";
             }
+
+
+
             return RedirectToAction(nameof(Index));
         }
 

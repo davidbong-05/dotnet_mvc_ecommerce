@@ -16,6 +16,9 @@
                 @Html.DisplayNameFor(model => model.User)
             </th>
             <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -24,6 +27,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.User.Id)
             </td>
+            <th>
+                    @Html.DisplayFor(modelItem => item.ShoppingBasket_Products)
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

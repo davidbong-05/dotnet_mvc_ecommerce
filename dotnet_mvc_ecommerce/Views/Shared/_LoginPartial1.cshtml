@@ -6,7 +6,7 @@
 
 @if (SignInManager.IsSignedIn(User)){
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="CustomerDetail" asp-action="Index">Product</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="CustomerDetail" asp-action="Index">CustomerDetail</a>
     </li>
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
@@ -15,6 +15,9 @@
         <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">Order</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingBasket" asp-action="Index"><i class="bi bi-cart"></i></a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingBasket_Product" asp-action="Index"><i class="bi bi-cart"></i></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingBasket" asp-action="Index">ShoppingBasket</a>
     </li>
 }
