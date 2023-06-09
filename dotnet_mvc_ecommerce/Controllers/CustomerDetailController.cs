@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using dotnet_mvc_ecommerce.Data;
 using dotnet_mvc_ecommerce.Models;
 using Microsoft.AspNetCore.Authorization;
+using dotnet_mvc_ecommerce.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace dotnet_mvc_ecommerce.Controllers
 {
@@ -15,16 +17,30 @@ namespace dotnet_mvc_ecommerce.Controllers
     public class CustomerDetailController : Controller
     {
         private readonly dotnet_mvc_ecommerceContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public CustomerDetailController(dotnet_mvc_ecommerceContext context)
+        public CustomerDetailController(dotnet_mvc_ecommerceContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: CustomerDetail
         public async Task<IActionResult> Index()
         {
-            var dotnet_mvc_ecommerceContext = _context.CustomerDetail.Include(c => c.User);
+            var user = await _userManager.GetUserAsync(this.User);
+            var dotnet_mvc_ecommerceContext = _context.CustomerDetail;
+
+            if (User.IsInRole("Shop Assistance"))
+            {
+                dotnet_mvc_ecommerceContext.Include(c => c.User);
+            }
+
+            if (User.IsInRole("Customer"))
+            {
+                dotnet_mvc_ecommerceContext.Include(c => c.User).Where (c => c.UserId == user.Id);
+            }
+           
             return View(await dotnet_mvc_ecommerceContext.ToListAsync());
         }
 
@@ -48,9 +64,24 @@ namespace dotnet_mvc_ecommerce.Controllers
         }
 
         // GET: CustomerDetail/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
+            var user = await _userManager.GetUserAsync(User);
+
+            if (User.IsInRole("Customer"))
+            {
+                var filteredUsers = _context.Users
+                .Where(u => u.Id == user.Id)
+                .ToList();
+
+                ViewData["UserId"] = new SelectList(filteredUsers, "Id", "UserName");
+            }
+
+            if (User.IsInRole("Shop Assistance"))
+            {
+                ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName");
+            }
+               
             return View();
         }
 
@@ -67,7 +98,21 @@ namespace dotnet_mvc_ecommerce.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", customerDetail.UserId);
+            var user = await _userManager.GetUserAsync(User);
+
+            if (User.IsInRole("Customer"))
+            {
+                var filteredUsers = _context.Users
+                .Where(u => u.Id == user.Id)
+                .ToList();
+
+                ViewData["UserId"] = new SelectList(filteredUsers, "Id", "UserName");
+            }
+
+            if (User.IsInRole("Shop Assistance"))
+            {
+                ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName");
+            }
             return View(customerDetail);
         }
 
@@ -84,7 +129,21 @@ namespace dotnet_mvc_ecommerce.Controllers
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", customerDetail.UserId);
+            var user = await _userManager.GetUserAsync(User);
+
+            if (User.IsInRole("Customer"))
+            {
+                var filteredUsers = _context.Users
+                .Where(u => u.Id == user.Id)
+                .ToList();
+
+                ViewData["UserId"] = new SelectList(filteredUsers, "Id", "UserName");
+            }
+
+            if (User.IsInRole("Shop Assistance"))
+            {
+                ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName");
+            }
             return View(customerDetail);
         }
 
@@ -120,7 +179,21 @@ namespace dotnet_mvc_ecommerce.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", customerDetail.UserId);
+            var user = await _userManager.GetUserAsync(User);
+
+            if (User.IsInRole("Customer"))
+            {
+                var filteredUsers = _context.Users
+                .Where(u => u.Id == user.Id)
+                .ToList();
+
+                ViewData["UserId"] = new SelectList(filteredUsers, "Id", "UserName");
+            }
+
+            if (User.IsInRole("Shop Assistance"))
+            {
+                ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName");
+            }
             return View(customerDetail);
         }
 
