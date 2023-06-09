@@ -9,9 +9,11 @@ using dotnet_mvc_ecommerce.Data;
 using dotnet_mvc_ecommerce.Models;
 using Microsoft.AspNetCore.Identity;
 using dotnet_mvc_ecommerce.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace dotnet_mvc_ecommerce.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly dotnet_mvc_ecommerceContext _context;

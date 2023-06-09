@@ -5,15 +5,21 @@
 @inject UserManager<User> UserManager
 
 @if (SignInManager.IsSignedIn(User)){
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="CustomerDetail" asp-action="Index">CustomerDetail</a>
-    </li>
+    @if (User.IsInRole("Shop Assistance"))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="CustomerDetail" asp-action="Index">CustomerDetail</a>
+        </li>
+    }
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">Order</a>
-    </li>
+    @if (User.IsInRole("Shop Assistance"))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">Order</a>
+        </li>
+    }
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingBasket" asp-action="Index"><i class="bi bi-cart"></i> Shopping Basket</a>
     </li>
