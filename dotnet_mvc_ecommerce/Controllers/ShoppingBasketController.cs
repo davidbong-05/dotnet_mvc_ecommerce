@@ -28,10 +28,13 @@ namespace dotnet_mvc_ecommerce.Controllers
         // GET: ShoppingBasket
         public async Task<IActionResult> Index()
         {
+            var user = await _userManager.GetUserAsync(User);
+
             var dotnet_mvc_ecommerceContext = _context.ShoppingBasket
                 .Include(s => s.User)
                 .Include(s => s.ShoppingBasket_Products)
-                    .ThenInclude(sp => sp.Product);
+                    .ThenInclude(sp => sp.Product)
+                .Where(s => s.UserId == user.Id);
             return View(await dotnet_mvc_ecommerceContext.ToListAsync());
         }
 
