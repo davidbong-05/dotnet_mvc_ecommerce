@@ -86,8 +86,16 @@ else
     <tfoot>
         <tr>
             <td>
-                <form asp-action="Checkout" method="post">
-                    <input type="" name="password" placeholder="password" />
+                <form class="row g-3" asp-action="Checkout" method="post">
+                    <div class="col-auto">
+                        <label class="col-form-label" for="password">Password</label>
+                    </div>
+                    <div class="col-auto">
+                        <input class="form-control" type="password" name="password" placeholder="password" />
+                    </div>
+                    <div class="col-auto">
+                        <input type="submit" value="Checkout" class="btn btn-primary" />
+                    </div>
                     @foreach (var item in Model  )
                     {
                         @foreach (var childItem in item.ShoppingBasket_Products)
@@ -98,8 +106,6 @@ else
                         }
                         <input type="hidden" name="ShoppingBasketId" value="@item.Id" />
                     }
-           
-                    <input type="submit" value="Checkout" class="btn btn-primary" />
                 </form>
             </td>
         </tr>
